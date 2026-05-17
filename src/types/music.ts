@@ -7,8 +7,6 @@ export type Track = {
   cover: string;
   audioUrl: string;
   externalUrl?: string;
-  videoId?: string;
-  thumbnailUrl?: string;
   source?: "local" | "youtube";
   mood: "focus" | "night" | "pulse" | "relax" | "cinematic";
   color: string;
