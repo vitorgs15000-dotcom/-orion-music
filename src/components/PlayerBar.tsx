@@ -39,18 +39,18 @@ export function PlayerBar({
   onRepeat,
   audioRef
 }: PlayerBarProps) {
-  const isYouTube = track.source === "youtube" && Boolean(track.videoId);
-  const shownProgress = isYouTube ? 0 : progress;
+  const shownProgress = progress;
+  const repeatLabel = repeat === "one" ? "Repetir uma" : repeat === "all" ? "Repetir fila" : "Repetir desligado";
 
   return (
-    <footer className="fixed inset-x-3 bottom-3 z-30 md:inset-x-5">
-      <div className="liquid-glass grid min-h-24 items-center gap-4 p-3 md:grid-cols-[minmax(180px,1fr)_auto_minmax(220px,1fr)] md:p-4">
+    <footer className="fixed inset-x-2 bottom-2 z-30 md:inset-x-5 md:bottom-4">
+      <div className="liquid-glass player-shell grid items-center gap-3 p-3 md:grid-cols-[minmax(180px,1fr)_auto_minmax(220px,1fr)] md:p-4">
         <audio ref={audioRef} preload="metadata">
           <source src={track.audioUrl} />
         </audio>
 
         <div className="flex min-w-0 items-center gap-3">
-          <CoverArt imageUrl={track.thumbnailUrl} variant={track.cover} className="h-14 w-14 shrink-0" />
+          <CoverArt variant={track.cover} className="h-14 w-14 shrink-0" />
           <div className="min-w-0">
             <strong className="block truncate text-white">{track.title}</strong>
             <span className="block truncate text-sm text-slate-400">{track.artist}</span>
@@ -59,46 +59,44 @@ export function PlayerBar({
 
         <div className="grid justify-items-center gap-2">
           <div className="flex items-center gap-2">
-            <button className={`player-button ${shuffle ? "active" : ""}`} disabled={isYouTube} onClick={onShuffle} type="button" aria-label="Shuffle">
-              S
+            <button className={`player-button ${shuffle ? "active" : ""}`} onClick={onShuffle} type="button" aria-label="Misturar">
+              Mix
             </button>
             <button className="player-button" onClick={onPrevious} type="button" aria-label="Anterior">
               &lt;
             </button>
-            <button className="play-button" disabled={isYouTube} onClick={onTogglePlay} type="button" aria-label="Play pause">
-              {isYouTube ? "YT" : isPlaying ? "II" : "P"}
+            <button className="play-button" onClick={onTogglePlay} type="button" aria-label="Play pause">
+              {isPlaying ? <span className="icon-pause" aria-hidden="true" /> : <span className="icon-play" aria-hidden="true" />}
             </button>
             <button className="player-button" onClick={onNext} type="button" aria-label="Proxima">
               &gt;
             </button>
-            <button className={`player-button ${repeat !== "off" ? "active" : ""}`} disabled={isYouTube} onClick={onRepeat} type="button" aria-label="Repeat">
+            <button className={`player-button ${repeat !== "off" ? "active" : ""}`} onClick={onRepeat} type="button" aria-label={repeatLabel}>
               {repeat === "one" ? "1" : "R"}
             </button>
           </div>
 
-          <div className="grid w-full min-w-[240px] grid-cols-[auto_minmax(120px,1fr)_auto] items-center gap-2 text-xs text-slate-400">
+          <div className="grid w-full grid-cols-[2.2rem_minmax(0,1fr)_2.2rem] items-center gap-2 text-xs text-slate-400">
             <span>{formatTime((shownProgress / 100) * track.duration)}</span>
             <input
               aria-label="Seekbar"
-              disabled={isYouTube}
               max="100"
               min="0"
               onChange={(event) => onSeek(Number(event.target.value))}
               type="range"
               value={shownProgress}
             />
-            <span>{isYouTube ? "YouTube" : formatTime(track.duration)}</span>
+            <span>{formatTime(track.duration)}</span>
           </div>
         </div>
 
         <div className="grid gap-2 md:justify-items-end">
-          <Visualizer active={isYouTube || isPlaying} />
+          <Visualizer active={isPlaying} />
           <label className="flex w-full max-w-xs items-center gap-2 text-xs text-slate-400">
             Volume
             <input
               aria-label="Volume"
               className="min-w-0 flex-1"
-              disabled={isYouTube}
               max="1"
               min="0"
               onChange={(event) => onVolume(Number(event.target.value))}
