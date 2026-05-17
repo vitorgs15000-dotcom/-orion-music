@@ -11,7 +11,7 @@ const particles = Array.from({ length: 18 }, (_, index) => ({
 
 export function ParticleField() {
   return (
-    <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+    <div className="particle-field pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
       {particles.map((particle) => (
         <motion.span
           key={particle.id}
