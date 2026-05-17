@@ -3,7 +3,8 @@ function cleanSecret(value: string | undefined) {
     .replace(/^YOUTUBE_API_KEY=/, "")
     .replace(/^NEXT_PUBLIC_API_KEY=/, "")
     .replace(/^["']|["']$/g, "")
-    .trim();
+    .trim()
+    .split(/\s+/)[0];
 }
 
 export const apiConfig = {
