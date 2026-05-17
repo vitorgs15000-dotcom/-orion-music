@@ -15,9 +15,15 @@ export function CoverArt({ variant, imageUrl, className = "" }: CoverArtProps) {
           backgroundPosition: "center",
           backgroundSize: "cover"
         }}
-      />
+      >
+        <span className="cover-mark">OM</span>
+      </div>
     );
   }
 
-  return <div className={`cover-art ${variant} ${className}`} aria-hidden="true" />;
+  return (
+    <div className={`cover-art ${variant} ${className}`} aria-hidden="true">
+      <span className="cover-mark">OM</span>
+    </div>
+  );
 }
