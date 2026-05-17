@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Orion Music">
+  <defs>
+    <linearGradient id="bg" x1="86" x2="426" y1="72" y2="438" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050712"/>
+      <stop offset=".52" stop-color="#132440"/>
+      <stop offset="1" stop-color="#3d226d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="156" fill="none" stroke="#71e1ff" stroke-width="18"/>
+  <path d="M168 178l54 70 54-42 60 84 58-66" fill="none" stroke="#9b6bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"/>
+  <circle cx="168" cy="178" r="18" fill="#f5f7ff"/>
+  <circle cx="222" cy="248" r="18" fill="#f5f7ff"/>
+  <circle cx="276" cy="206" r="18" fill="#f5f7ff"/>
+  <circle cx="336" cy="290" r="20" fill="#6ef7b1"/>
+  <circle cx="394" cy="224" r="18" fill="#f5f7ff"/>
+  <path d="M220 344h72c34 0 58 22 58 54 0 34-24 56-58 56h-72c-34 0-58-22-58-56 0-32 24-54 58-54zm2 32c-14 0-24 9-24 22 0 14 10 24 24 24h68c14 0 24-10 24-24 0-13-10-22-24-22h-68z" fill="#f5f7ff"/>
+</svg>
