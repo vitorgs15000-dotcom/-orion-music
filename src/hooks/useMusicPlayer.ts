@@ -100,19 +100,13 @@ export function useMusicPlayer(initialTracks: Track[]) {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (currentTrack?.videoId) {
-      audio.pause();
-      setProgress(0);
-      return;
-    }
-
     audio.load();
     setProgress(0);
 
     if (isPlaying) {
       void audio.play().catch(() => setIsPlaying(false));
     }
-  }, [currentTrack?.audioUrl, currentTrack?.videoId, isPlaying]);
+  }, [currentTrack?.audioUrl, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
