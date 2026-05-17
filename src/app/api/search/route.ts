@@ -104,8 +104,6 @@ export async function GET(request: Request) {
         duration: 180,
         cover: ["cover-orion", "cover-focus", "cover-night", "cover-pulse"][index % 4],
         audioUrl: "/api/preview",
-        videoId: videoId.startsWith("external-") ? undefined : videoId,
-        thumbnailUrl: item.snippet?.thumbnails?.high?.url ?? item.snippet?.thumbnails?.medium?.url,
         externalUrl: videoId.startsWith("external-") ? undefined : `https://www.youtube.com/watch?v=${videoId}`,
         source: "youtube",
         mood: ["focus", "night", "pulse", "relax", "cinematic"][index % 5] as Track["mood"],
