@@ -25,9 +25,9 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 12% -8%, rgba(113, 225, 255, 0.12), transparent 26rem),
-    radial-gradient(circle at 86% 0%, rgba(155, 107, 255, 0.1), transparent 28rem),
-    linear-gradient(180deg, #000000, #030305 58%, #000000);
+    radial-gradient(circle at 12% -8%, rgba(113, 225, 255, 0.07), transparent 24rem),
+    radial-gradient(circle at 86% 0%, rgba(155, 107, 255, 0.06), transparent 26rem),
+    linear-gradient(180deg, #000000, #010101 58%, #000000);
   color: #f6f8ff;
 }
 
@@ -51,13 +51,20 @@ input[type="range"] {
   border: 1px solid var(--orion-line);
   border-radius: 12px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
-    rgba(4, 4, 7, 0.78);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(0, 0, 0, 0.86);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-    0 24px 90px rgba(0, 0, 0, 0.42);
+    0 24px 90px rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(28px) saturate(1.25);
+}
+
+.now-panel {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+    radial-gradient(circle at 18% 0%, rgba(113, 225, 255, 0.11), transparent 18rem),
+    rgba(0, 0, 0, 0.9);
 }
 
 .liquid-glass::before {
@@ -65,8 +72,8 @@ input[type="range"] {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 0%, rgba(113, 225, 255, 0.18), transparent 18rem),
-    radial-gradient(circle at 100% 18%, rgba(255, 111, 145, 0.12), transparent 16rem);
+    radial-gradient(circle at 18% 0%, rgba(113, 225, 255, 0.11), transparent 18rem),
+    radial-gradient(circle at 100% 18%, rgba(155, 107, 255, 0.09), transparent 16rem);
   content: "";
 }
 
@@ -141,15 +148,71 @@ input[type="range"] {
 }
 
 .cover-art {
+  position: relative;
   aspect-ratio: 1;
   width: 100%;
   overflow: hidden;
   border-radius: 10px;
   background:
-    linear-gradient(135deg, rgba(113, 225, 255, 0.85), transparent 40%),
-    radial-gradient(circle at 72% 34%, rgba(255, 111, 145, 0.95), transparent 24%),
-    linear-gradient(160deg, #18223d, #3d226d 48%, #06111d);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.25);
+    linear-gradient(135deg, rgba(113, 225, 255, 0.55), transparent 42%),
+    radial-gradient(circle at 72% 34%, rgba(155, 107, 255, 0.44), transparent 26%),
+    linear-gradient(160deg, #050505, #10121a 48%, #000000);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 18px 42px rgba(0, 0, 0, 0.52);
+}
+
+.track-card {
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(0, 0, 0, 0.82);
+}
+
+.track-card.is-active {
+  box-shadow: inset 0 0 0 1px rgba(113, 225, 255, 0.2), 0 18px 42px rgba(113, 225, 255, 0.08);
+}
+
+.track-play-button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orion-green), var(--orion-cyan));
+  color: #06111d;
+  opacity: 1;
+  box-shadow: 0 12px 34px rgba(113, 225, 255, 0.18);
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.track-card:hover .track-play-button {
+  transform: scale(1.04);
+  filter: brightness(1.06);
+}
+
+.cover-mark {
+  position: absolute;
+  inset: auto 14px 12px auto;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.52);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  box-shadow: 0 0 24px rgba(113, 225, 255, 0.22);
+}
+
+.track-card-cover .cover-mark,
+.player-shell .cover-mark,
+.playlist-row .cover-mark {
+  inset: auto 6px 6px auto;
+  width: 24px;
+  height: 24px;
+  font-size: 0.52rem;
 }
 
 .cover-focus {
@@ -192,8 +255,11 @@ input[type="range"] {
 }
 
 .player-button {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 36px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 900;
 }
 
 .player-button.active {
@@ -202,15 +268,87 @@ input[type="range"] {
 }
 
 .play-button {
-  width: 52px;
-  height: 52px;
+  width: 62px;
+  height: 48px;
+  border-radius: 999px;
   color: #06111d;
   background: linear-gradient(135deg, var(--orion-green), var(--orion-cyan));
+  font-size: 0.82rem;
+  font-weight: 950;
 }
 
 .player-button:hover,
 .play-button:hover {
   transform: translateY(-2px);
+}
+
+.icon-play {
+  width: 0;
+  height: 0;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid currentColor;
+  border-top: 8px solid transparent;
+  transform: translateX(1px);
+}
+
+.icon-pause {
+  position: relative;
+  width: 16px;
+  height: 18px;
+}
+
+.icon-pause::before,
+.icon-pause::after {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 18px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.icon-pause::before {
+  left: 2px;
+}
+
+.icon-pause::after {
+  right: 2px;
+}
+
+.playlist-row,
+.queue-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
+  padding: 8px;
+  text-align: left;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.playlist-row:hover,
+.queue-row:hover,
+.queue-row.is-active {
+  transform: translateY(-1px);
+  border-color: rgba(113, 225, 255, 0.28);
+  background: rgba(113, 225, 255, 0.09);
+}
+
+.queue-index {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgb(165, 243, 252);
+  font-size: 0.78rem;
+  font-weight: 950;
 }
 
 .visualizer {
@@ -247,4 +385,44 @@ code {
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.08);
   padding: 0.1rem 0.35rem;
+}
+
+@media (min-width: 640px) {
+  .track-play-button {
+    opacity: 0;
+  }
+
+  .track-card.is-active .track-play-button,
+  .track-card:hover .track-play-button {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .player-button {
+    width: 36px;
+    height: 34px;
+    font-size: 0.68rem;
+  }
+
+  .play-button {
+    width: 54px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .particle-field span:nth-child(n + 11) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .visualizer.is-active span {
+    animation: none;
+  }
 }
