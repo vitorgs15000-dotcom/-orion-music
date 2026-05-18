@@ -10,14 +10,6 @@ type YouTubeSearchItem = {
   snippet?: {
     title?: string;
     channelTitle?: string;
-    thumbnails?: {
-      medium?: {
-        url?: string;
-      };
-      high?: {
-        url?: string;
-      };
-    };
   };
 };
 
@@ -83,6 +75,7 @@ export async function GET(request: Request) {
   url.searchParams.set("type", "video");
   url.searchParams.set("videoCategoryId", "10");
   url.searchParams.set("maxResults", "8");
+  url.searchParams.set("fields", "items(id/videoId,snippet/title,snippet/channelTitle)");
   url.searchParams.set("q", `${query} music`);
   url.searchParams.set("key", apiConfig.apiKey);
 
