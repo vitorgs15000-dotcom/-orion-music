@@ -1,13 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type SearchBarProps = {
+  value?: string;
   onSearch: (query: string) => void;
 };
 
-export function SearchBar({ onSearch }: SearchBarProps) {
-  const [query, setQuery] = useState("");
+export function SearchBar({ value = "", onSearch }: SearchBarProps) {
+  const [query, setQuery] = useState(value);
+
+  useEffect(() => {
+    setQuery(value);
+  }, [value]);
 
   return (
     <form
@@ -18,6 +23,8 @@ export function SearchBar({ onSearch }: SearchBarProps) {
       }}
     >
       <input
+        aria-label="Pesquisar musicas no Orion"
+        autoComplete="off"
         className="h-11 min-w-0 flex-1 bg-transparent px-3 text-sm text-white outline-none placeholder:text-slate-500"
         maxLength={90}
         onChange={(event) => setQuery(event.target.value)}
