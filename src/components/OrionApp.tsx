@@ -16,6 +16,15 @@ type OrionAppProps = {
   playlists: Playlist[];
 };
 
+const quickSearches = [
+  { label: "Funk", query: "funk brasil" },
+  { label: "Sertanejo", query: "sertanejo 2026" },
+  { label: "Trap", query: "trap brasil" },
+  { label: "Gospel", query: "gospel brasil" },
+  { label: "Pagode", query: "pagode" },
+  { label: "Lo-fi", query: "lofi focus" }
+];
+
 function statusText(status: string | null) {
   if (!status) return "Biblioteca local pronta";
   if (status === "youtube-ok") return "YouTube conectado em modo musica";
@@ -87,6 +96,12 @@ export function OrionApp({ tracks, playlists }: OrionAppProps) {
     }
   }
 
+  function playAllVisible() {
+    const sourceList = visibleResults.length ? visibleResults : tracks;
+    player.setShuffle(true);
+    player.playFromQueue(sourceList, 0);
+  }
+
   return (
     <>
       <ParticleField />
@@ -99,8 +114,19 @@ export function OrionApp({ tracks, playlists }: OrionAppProps) {
               Pesquise musicas por API autorizada. O Orion mostra tudo como faixa com capa, sem video embutido e com player otimizado para celular.
             </p>
           </div>
-          <SearchBar onSearch={(value) => void handleSearch(value)} />
+          <SearchBar onSearch={(value) => void handleSearch(value)} value={query} />
         </header>
+
+        <nav className="quick-actions" aria-label="Atalhos de musicas">
+          <button className="quick-chip quick-chip-primary" onClick={playAllVisible} type="button">
+            Mix rapido
+          </button>
+          {quickSearches.map((item) => (
+            <button className="quick-chip" key={item.label} onClick={() => void handleSearch(item.query)} type="button">
+              {item.label}
+            </button>
+          ))}
+        </nav>
 
         <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
           <motion.section
@@ -208,6 +234,9 @@ export function OrionApp({ tracks, playlists }: OrionAppProps) {
             <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-sm font-bold text-slate-300">
               {visibleResults.length} itens
             </span>
+            <button className="result-action" onClick={playAllVisible} type="button">
+              Tocar tudo
+            </button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
