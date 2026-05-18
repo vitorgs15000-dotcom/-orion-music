@@ -106,7 +106,7 @@ export function useMusicPlayer(initialTracks: Track[]) {
     if (isPlaying) {
       void audio.play().catch(() => setIsPlaying(false));
     }
-  }, [currentTrack?.audioUrl, isPlaying]);
+  }, [currentTrack?.id, currentTrack?.audioUrl, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
