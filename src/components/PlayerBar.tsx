@@ -57,7 +57,7 @@ export function PlayerBar({
           </div>
         </div>
 
-        <div className="grid justify-items-center gap-2">
+        <div className="player-controls grid justify-items-center gap-2">
           <div className="flex items-center gap-2">
             <button className={`player-button ${shuffle ? "active" : ""}`} onClick={onShuffle} type="button" aria-label="Misturar">
               Mix
@@ -90,7 +90,7 @@ export function PlayerBar({
           </div>
         </div>
 
-        <div className="grid gap-2 md:justify-items-end">
+        <div className="player-secondary-panel grid gap-2 md:justify-items-end">
           <Visualizer active={isPlaying} />
           <label className="flex w-full max-w-xs items-center gap-2 text-xs text-slate-400">
             Volume
