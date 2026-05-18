@@ -31,6 +31,7 @@ export function TrackCard({ track, active = false, onPlay }: TrackCardProps) {
             <div className="min-w-0">
               <h3 className="truncate font-black text-white">{track.title}</h3>
               <p className="truncate text-sm text-slate-400">{track.artist}</p>
+              <p className="mt-1 truncate text-xs text-slate-500">{track.album}</p>
             </div>
             <span className="track-play-button shrink-0" aria-hidden="true">
               <span className="icon-play" />
